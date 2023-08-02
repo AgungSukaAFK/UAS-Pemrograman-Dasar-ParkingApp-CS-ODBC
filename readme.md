@@ -1,6 +1,6 @@
-Muhamad Agung Maulana
-NPM 1101221114
-FILKOM TEKNIK INFORMATIKA
+Muhamad Agung Maulana  
+NPM 1101221114  
+FILKOM TEKNIK INFORMATIKA  
 
 # PREVIEW
 ![PREVIEW IMAGE](https://github.com/AgungSukaAFK/UAS-Pemrograman-Dasar-ParkingApp-CS-ODBC/blob/main/preview.PNG)
