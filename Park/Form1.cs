@@ -163,8 +163,11 @@ namespace Park
             {
 
                 // dr.GetString(0) = kode, 1 = no_polisi, 2 = jenis, 3 = waktu, 4 = status
-                if (txtKarcis.Text == dr.GetString(0) && cmbJenis.Text == dr.GetString(2)) { 
+                if (txtNoPolisi.Text == dr.GetString(1) && dr.GetString(4) == "masuk") {
+                    disabled();
                     ubah_simpan(true);
+                    txtKarcis.Text = dr.GetString(0);
+                    cmbJenis.SelectedItem = dr.GetString(2);
                 }
             }
             else {
@@ -216,10 +219,6 @@ namespace Park
         {
             DateTime dateTime = dateTimePicker1.Value;
             string waktu = dateTime.ToString("MM/dd/yyyy hh:mm tt");
-
-            //DateTime timee = DateTime.Parse(waktu);
-            //string msg = string.Format("Time: {0}", timee.Day);
-            //MessageBox.Show(msg, "PESAN", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
             return waktu;
         }
@@ -314,6 +313,66 @@ namespace Park
         private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+            enabled();
+            Bersih();
+        }
+
+        private void cari_data()
+        {
+            string pilihan = filterPilihan();
+
+            string sql = string.Format("SELECT * FROM park WHERE {0} LIKE '%{1}%'", pilihan, txtFilter.Text);
+            dml = new OdbcCommand(sql, ClsKoneksi.koneksi);
+            dr = dml.ExecuteReader();
+
+            if (dr.HasRows)
+            {
+                lvPark.Items.Clear();
+                while (dr.Read())
+                {
+                    ListViewItem Data = lvPark.Items.Add(dr.GetString(0));
+                    Data.SubItems.Add(dr.GetString(1));
+                    Data.SubItems.Add(dr.GetString(2));
+                    Data.SubItems.Add(dr.GetString(3));
+                    Data.SubItems.Add(dr.GetString(4));
+
+                }
+            }
+            else
+            {
+                lvPark.Items.Clear();
+            }
+        }
+
+        private string filterPilihan() {
+            string res = "";
+            if (cmbFilter.Text == "Nomor Karcis")
+            {
+                res = "karcis";
+            } else if (cmbFilter.Text == "Plat Nomor Polisi")
+            {
+                res = "no_polisi";
+            } else if (cmbFilter.Text == "Waktu Parkir")
+            {
+                res = "waktu";
+            } else if (cmbFilter.Text == "Status Parkir")
+            {
+                res = "status";
+            } else if (cmbFilter.Text == "Jenis Kendaraan")
+            {
+                res = "jenis";
+            }
+
+            return res;
+        }
+
+        private void txtFilter_TextChanged(object sender, EventArgs e)
+        {
+            cari_data();
         }
     }
 }
