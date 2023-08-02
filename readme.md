@@ -3,7 +3,7 @@ NPM 1101221114
 FILKOM TEKNIK INFORMATIKA
 
 # PREVIEW
-![Db](https://github.com/AgungSukaAFK/pemrogamanDasarParkir/blob/main/preview.PNG)
+![PREVIEW IMAGE](https://github.com/AgungSukaAFK/UAS-Pemrograman-Dasar-ParkingApp-CS-ODBC/blob/main/preview.PNG)
 
 ## Environment
 This project running with phpmyadmin MariaDB in development, also with these following other environment
